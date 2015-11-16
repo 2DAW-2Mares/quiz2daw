@@ -56,4 +56,27 @@ exports.destroy = function(req, res){
         res.redirect('/cuestionarios');
     }).catch(function(error){next(error)});
 }
-
+// GET /cuestionarios/new
+exports.new = function(req, res) {
+	var cuestionario = models.Cuestionario.build( //crea objeto Cuestionario
+	{observaciones: "observaciones", fechaFin: "fechaFin"}
+	);
+    res.render('cuestionarios/new', {cuestionario: cuestionario});
+};
+// POST /cuestionario/create
+exports.create = function(req, res) {
+	var cuestionario = models.Cuestionario.build( req.body.cuestionario );
+	//guarda en DB los campos pregunta y respuesta de quiz
+	cuestionario.validate()
+	.then(
+		function(err){
+			if(err) {
+			res.render('cuestionarios/new', {cuestionario: cuestionario, errors: err.errors});
+			} else {
+				cuestionario.save({fields: ["observaciones", "fechaFin"]}).then(function(){
+					res.redirect('/cuestionarios');
+				})	//Redireccion HTTP (URL relativo) lista de preguntas
+			}
+		}
+	);
+};
