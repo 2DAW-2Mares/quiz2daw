@@ -98,8 +98,10 @@ router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 router.get('/quizes/:quizId(\\d+)/comments/:comentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 
 router.get('/users', 							sessionController.adminRequired, 	userController.index);
+router.get('/miPerfil', sessionController.loginRequired, 	userController.miPerfil);
 router.get('/users/:userId(\\d+)/edit',         sessionController.adminRequired, 	userController.edit);
 router.put('/users/:userId(\\d+)',              sessionController.adminRequired, 	userController.update);
+router.put('/users',              sessionController.loginRequired, 	userController.updateMiPerfil);
 router.delete('/users/:userId(\\d+)', 			sessionController.adminRequired, 	userController.destroy);
 
 router.delete('/alumnos/:alumnoId(\\d+)', 		sessionController.adminRequired, 	alumnoController.destroy);

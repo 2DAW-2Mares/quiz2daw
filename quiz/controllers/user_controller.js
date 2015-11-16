@@ -45,6 +45,23 @@ exports.edit=function(req,res){
     res.render('users/edit', {user : user});
 };
 
+exports.miPerfil=function(req,res){
+	models.User.find({
+		where : {
+			id : Number(req.session.user.id)
+		},
+	}).then(function(user) {
+		if (user) {
+			res.render('users/miPerfil', {user : user});
+		} else {
+			res.redirect('/');
+		}
+	}).catch(function(error) {
+		res.redirect('/miPerfil'); // TODO lanzar error
+	});
+    
+};
+
 exports.update=function(req,res){
     req.user.username = req.body.user.username;
     req.user.password = req.body.user.password;
@@ -62,6 +79,41 @@ exports.update=function(req,res){
             }
         }
     );
+};
+
+exports.updateMiPerfil=function(req,res){
+	models.User.find({
+		where : {
+			id : Number(req.session.user.id)
+		},
+	}).then(function(user) {
+		if (user) {
+			user.username = req.body.user.username;
+			user.password = req.body.user.password;
+			
+			user
+					.validate()
+					.then(
+					function(err){
+						if(err){
+						res.render('users/miPerfil', {user: req.user, errors: err.errors});
+					}else  {
+						user
+								.save({fields:["username", "password"]})
+								.then(function(){
+									req.session.user.username = user.username;
+									res.redirect('/miPerfil');
+									});
+					}
+				}
+    );
+		} else {
+			res.redirect('/');
+		}
+	}).catch(function(error) {
+		res.redirect('/miPerfil'); // TODO lanzar error
+	});
+
 };
 
 //Elimina users
