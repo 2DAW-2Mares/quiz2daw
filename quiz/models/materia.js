@@ -1,4 +1,3 @@
-
 /*tabla de materias*/
 
 module.exports = function(sequelize, DataTypes) {
@@ -10,11 +9,12 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		ensenanza: {
 			type: DataTypes.STRING,
-			validate: {notEmpty: {msg: "->Falta la enseñanza"}}
+			validate: {notEmpty: {msg: "->Falta la enseï¿½anza"}}
 		},
 		curso: {
 			type: DataTypes.STRING,
 			validate: {notEmpty: {msg: "->Falta el curso"}}
 		}
 	});
+
 }

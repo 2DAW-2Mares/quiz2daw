@@ -1,4 +1,4 @@
-//Definición del modelo de Alumno
+//Definiciï¿½n del modelo de Alumno
 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Alumno',
@@ -21,4 +21,5 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING
 		}
 	});
+
 }

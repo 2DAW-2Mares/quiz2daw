@@ -1,6 +1,6 @@
 var models = require('../models/models.js');
 
-// Autoload - factoriza el código si ruta incluye :materiaId
+// Autoload - factoriza el cÃ³digo si ruta incluye :materiaId
 exports.load = function(req, res, next, materiaId) {
 	models.Materia.find({
 		where : {
