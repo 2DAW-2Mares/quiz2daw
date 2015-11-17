@@ -3,9 +3,9 @@
 <tr>
 	<%if(session.user){%>
 		<td><%= users[i].id %>-<%= users[i].username %></td>
-		<td><a href="/users/<%= users[i].id %>/edit"><button>editar</button></a></td>
+		<td><a href="/admin/users/<%= users[i].id %>/edit"><button>editar</button></a></td>
 		<td>
-			<form method="post" action="/users/<%= users[i].id %>?_method=delete">
+			<form method="post" action="/admin/users/<%= users[i].id %>?_method=delete">
 				<button type="submit" onclick="return confirm('Borrar: <%= users[i].username %>');">
 					borrar
 				</button>

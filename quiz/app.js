@@ -9,6 +9,7 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 
 var routes = require('./routes/index');
+var routesAdmin = require('./routes/admin');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 		next();
 });
 
+app.use('/admin/', routesAdmin);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

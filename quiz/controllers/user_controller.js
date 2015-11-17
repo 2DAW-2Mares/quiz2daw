@@ -27,7 +27,7 @@ exports.autenticar = function(login, pass, callback){
 				callback(null, user);
 			}else{callback(new Error('Error al introducir los datos'));}
 		}
-	).catch(function(error){ next(error)});
+	).catch(function(error){ callback(new Error('Error al introducir los datos'));});
 };
 
 

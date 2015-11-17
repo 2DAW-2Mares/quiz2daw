@@ -21,9 +21,9 @@
 			<td><%= profesores[i].dni %></td> 
 			<td><%= profesores[i].movil %></td>
 			<td><%= profesores[i].departamento %></td>
-			<td><a href="profesores/<%= profesores[i].id %>/edit"><button>editar</button></a></td>
+			<td><a href="/admin/profesores/<%= profesores[i].id %>/edit"><button>editar</button></a></td>
 			<td>
-				<form method="post" action="profesores/<%= profesores[i].id %>?_method=delete">
+				<form method="post" action="/admin/profesores/<%= profesores[i].id %>?_method=delete">
 					<button type="submit" onclick="return confirm('Borrar: <%= profesores[i].apellido %>');">borrar</button>
 				</form>
 			</td>
@@ -35,6 +35,6 @@
 <br />
 <table>
 <td>
-	<a href="/profesores/new"><button type="button">Añadir Profesor</button></a>
+	<a href="/admin/profesores/new"><button type="button">Añadir Profesor</button></a>
 </td>
 </table>
