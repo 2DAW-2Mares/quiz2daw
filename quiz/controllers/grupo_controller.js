@@ -57,7 +57,7 @@ exports.update=function(req,res){
             }else  {
                 req.grupo
                         .save({fields:["tutor", "anyo", "grupo", "subgrupo", "ensenanza", "curso", "horarioVisita"]})
-                        .then(function(){res.redirect('/grupos/');});
+                        .then(function(){res.redirect('/admin/grupos/');});
             }
         }
     );
@@ -66,7 +66,7 @@ exports.update=function(req,res){
 //Elimina los grupos
 exports.destroy = function(req, res) {
 	req.grupo.destroy().then(function() {
-		res.redirect('/grupos');
+		res.redirect('/admin/grupos');
 	}).catch(function(error) {
 		next(error)
 	});

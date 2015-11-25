@@ -14,7 +14,7 @@
 <tr>
 	<%if(session.user){%>
 		<tr>
-			<td><%= profesores[i].id %></td>
+			<td><a href="/admin/profesores/<%= profesores[i].id %>"><%= profesores[i].id %></a></td>
 			<td><%= profesores[i].apellidos %></td>
 			<td><%= profesores[i].nombre %></td>
 			<td><%= profesores[i].email %></td>

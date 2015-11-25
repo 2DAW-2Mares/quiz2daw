@@ -59,7 +59,7 @@ exports.create = function(req, res) {
 			res.render('quizes/new', {quiz: quiz, errors: err.errors});
 			} else {
 				quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
-					res.redirect('/quizes');
+					res.redirect('/admin/quizes');
 				})	//Redireccion HTTP (URL relativo) lista de preguntas
 			}
 		}
@@ -85,7 +85,7 @@ exports.update = function(req, res) {
                 }else{
                     req.quiz
                             .save({fields:["pregunta","respuesta"]})
-                            .then(function(){res.redirect('/quizes');});
+                            .then(function(){res.redirect('/admin/quizes');});
                 }
             }
         );
@@ -93,6 +93,6 @@ exports.update = function(req, res) {
 
 exports.destroy = function(req, res) {
     req.quiz.destroy().then( function(){
-        res.redirect('/quizes');
+        res.redirect('/admin/quizes');
     }).catch(function(error){next(error)});
 };

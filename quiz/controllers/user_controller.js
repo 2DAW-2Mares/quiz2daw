@@ -19,13 +19,15 @@ exports.load = function(req, res, next, userId) {
 };
 
 // Autenticar con la base de datos de usuarios
-exports.autenticar = function(login, pass, callback){
+exports.autenticar = function(login, pass, callback) {
 	models.User.find({
-			where: {username: login, password: pass}
-		}).then(function(user){
-			if(user){
+            where: { username: login, password: pass }
+        }).then(function(user) {
+				if(user) {
 				callback(null, user);
-			}else{callback(new Error('Error al introducir los datos'));}
+			} else {
+				callback(new Error('Nombre de usuario o contraseña incorrecta.'));
+			}
 		}
 	).catch(function(error){ callback(new Error('Error al introducir los datos'));});
 };
@@ -75,7 +77,7 @@ exports.update=function(req,res){
             }else  {
                 req.user
                         .save({fields:["username", "password"]})
-                        .then(function(){res.redirect('/users/');});
+                        .then(function(){res.redirect('/admin/users/');});
             }
         }
     );
@@ -120,7 +122,7 @@ exports.updateMiPerfil=function(req,res){
 
 exports.destroy = function(req, res) {
 	req.user.destroy().then(function() {
-		res.redirect('/users');
+		res.redirect('/admin/users');
 	}).catch(function(error) {
 		next(error)
 	});

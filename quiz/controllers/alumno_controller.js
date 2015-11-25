@@ -16,9 +16,21 @@ exports.load = function(req, res, next, alumnoId) {
 		next(error);
 	});
 };
+// Autenticar con la base de datos de usuarios
+exports.roleAlumno = function(userId, callback){
+	models.Alumno.find({
+                    where: {
+                        userId: Number(userId)
+                    }
+            }).then(function(alumno) {
+                    callback(null, alumno);
+		}
+	).catch(function(error){ callback(new Error(error.message))});
+};
+
 exports.destroy = function(req, res) {
 	req.alumno.destroy().then(function() {
-		res.redirect('/alumnos');
+		res.redirect('/admin/alumnos');
 	}).catch(function(error) {
 		next(error)
 	});
@@ -52,7 +64,7 @@ exports.create = function(req, res) {
 			res.render('alumnos/new', {alumno: alumno, errors: err.errors});
 			} else {
 				alumno.save({fields: ["dni","nombre", "apellido1", "apellido2", "email"]}).then(function(){
-					res.redirect('/alumnos');
+					res.redirect('/admin/alumnos');
 				})	//Redireccion HTTP (URL relativo) lista de preguntas
 			}
 		}
@@ -80,7 +92,7 @@ exports.update = function(req, res) {
                 }else{
                     req.alumno
                             .save({fields:["dni","nombre","apellido1","apellido2","email"]})
-                            .then(function(){res.redirect('/alumnos');});
+                            .then(function(){res.redirect('/admin/alumnos');});
                 }
             }
         );

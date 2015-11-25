@@ -51,7 +51,7 @@ exports.create = function(req, res) {
 			res.render('materias/new', {materia: materia, errors: err.errors});
 			} else {
 				materia.save({fields: ["id", "materia", "ensenanza", "curso"]}).then(function(){
-					res.redirect('/materias');
+					res.redirect('/admin/materias');
 				})	//Redireccion HTTP (URL relativo) lista de materias
 			}
 		}
@@ -79,7 +79,7 @@ exports.update=function(req,res){
             }else  {
                 req.materia
                         .save({fields:["materia", "ensenanza","curso"]})
-                        .then(function(){res.redirect('/materias');});
+                        .then(function(){res.redirect('/admin/materias');});
             }
         }
     );
@@ -89,7 +89,7 @@ exports.update=function(req,res){
 
 exports.destroy = function(req, res) {
 	req.materia.destroy().then(function() {
-		res.redirect('/materias');
+		res.redirect('/admin/materias');
 	}).catch(function(error) {
 		next(error)
 	});
