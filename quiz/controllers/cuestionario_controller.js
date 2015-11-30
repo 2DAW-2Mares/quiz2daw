@@ -82,3 +82,13 @@ exports.create = function(req, res) {
 		}
 	);
 };
+
+// GET /quizes/: Cuestionario
+exports.show = function(req, res, next) {
+	req.cuestionario.getQuizzes().then(function(quizes) {
+		res.render('cuestionarios/show', {cuestionario: req.cuestionario, quizes: quizes});
+	}).catch(function(error) {
+		next(error);
+	});
+};
+

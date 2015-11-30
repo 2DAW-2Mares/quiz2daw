@@ -1,0 +1,27 @@
+
+<table border=1>
+	<tr>
+		<th colspan=3><h3>Cuestionarios</h3></th>
+	</tr>
+	<tr>
+		<th><h4>CREADOR</h4></th>
+		<th><h4>OBSERVACIONES</h4></th>
+		<th><h4>FECHA</h4></th>
+	</tr>
+	<tr>
+		<td><%= cuestionario.creador %></td>
+		<td><%= cuestionario.observaciones %></td>
+		<td><%= cuestionario.fechaFin.toDateString() %></td>
+	</tr>
+</table>
+<table border=1 style="margin-top:20px;">
+	<tr>
+		<th><h3>Preguntas</h3></th>
+		<td><a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/new/"><button>Crear Pregunta</button></a></td>
+	</tr>
+	<tr>
+		<% quizes.forEach(function(quizes){%>
+			<td><%= quizes.pregunta %></td>
+		<%});%>
+	</tr>
+</table>

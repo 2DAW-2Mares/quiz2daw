@@ -63,6 +63,19 @@
 			<%}else{%>
 				<!-- <span class="right"> --> <li><a>Rol:<%=session.role%> - <%=session.user.username%></a></li><li><a href="/logout">Logout</a></li></span>
 			<%}%>
+
+			<% if(session.role == 1){ %>
+				<li><a href="/admin/">Inicio</a></li>
+				<li><a href="/admin/cuestionarios">Cuestionarios</a></li>
+			<%}%>
+
+			<% if(session.role == 2){ %>
+				<li><a href="/admin/">Inicio</a></li>
+				<li><a href="/admin/cuestionarios">Cuestionarios</a></li>
+			<%}%>
+
+			<% if(!(session.role == 1 || session.role == 2)){ %>
+
 			<li><a href="/admin/">Inicio</a></li>
 			<li><a href="/admin/quizes">Preguntas</a></li>
 			<li><a href="/admin/users">Usuarios</a></li>
@@ -72,6 +85,9 @@
 			<li><a href="/admin/cuestionarios">Cuestionarios</a></li>
 			<li><a href="/admin/materias">Materias</a></li>
 			<li><a href="/admin/observaciones">Observaciones</a></li>
+
+			<%}%>
+
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

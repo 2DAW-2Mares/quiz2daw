@@ -52,7 +52,7 @@ exports.create = function(req,res){
                             return;
                     }
                     if(profesor) {
-                        req.session.profesor = {id:profesor.id, nombre:profesor.nombre};
+                        req.session.profesor = {id:profesor.id, nombre:profesor.nombre, apellidos:profesor.apellidos};
                         req.session.role = 1;
                     }
                     var alumnoController = require('./alumno_controller');
@@ -63,7 +63,7 @@ exports.create = function(req,res){
                                 return;
                             }
                             if(alumno) {
-                                req.session.alumno = {id:alumno.id, nombre:alumno.nombre};
+                                req.session.alumno = {id:alumno.id, nombre:alumno.nombre, apellido1:alumno.apellido1};
                                 req.session.role = 2;
                             }
                         res.redirect(req.session.redir.toString());
@@ -77,5 +77,8 @@ exports.create = function(req,res){
 
 exports.destroy = function(req,res){
 	delete req.session.user;
+	delete req.session.role;
+	if(req.session.profesor) {delete req.session.profesor}
+	if(req.session.alumno) {delete req.session.alumno}
 	res.redirect(req.session.redir.toString());
 };

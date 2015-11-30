@@ -63,6 +63,9 @@ router.delete('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginReq
 router.get('/cuestionarios/new',sessionController.loginRequired, cuestionarioController.new);
 router.post('/cuestionarios/create', sessionController.loginRequired, cuestionarioController.create);
 
+router.get('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.show);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes/new', sessionController.loginRequired, quizController.new);
+
 //Grupos
 router.get('/grupos', 							sessionController.adminRequired,	grupoController.index);
 router.get('/grupos/:grupoId(\\d+)', 												grupoController.show);
