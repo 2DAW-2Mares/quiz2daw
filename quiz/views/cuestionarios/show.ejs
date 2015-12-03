@@ -13,15 +13,7 @@
 		<td><%= cuestionario.observaciones %></td>
 		<td><%= cuestionario.fechaFin.toDateString() %></td>
 	</tr>
-</table>
-<table border=1 style="margin-top:20px;">
 	<tr>
-		<th><h3>Preguntas</h3></th>
-		<td><a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/new/"><button>Crear Pregunta</button></a></td>
-	</tr>
-	<tr>
-		<% quizes.forEach(function(quizes){%>
-			<td><%= quizes.pregunta %></td>
-		<%});%>
+		<td colspan=3 align="center"><a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/"><button>Ver Preguntas</button></a></td>
 	</tr>
 </table>
