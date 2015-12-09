@@ -4,7 +4,7 @@
 		<a href="/admin/cuestionarios/new"><button type="button">Crear cuestionario</button></a>
 	<%}%>
 </caption>
-<tr><td>Creador</td><td>Observaciones</td><td>Fecha</td><td colspan="3">Acciones</td></tr>
+<tr><td>Creador</td><td>Observaciones</td><td>Fecha</td><td colspan="5">Acciones</td></tr>
 
 <% var i; for (i = 0 ;i < cuestionarios.length ; i++){ %>
     <tr>
@@ -20,15 +20,18 @@
 	        <% if(session.role == 1){ %>
 		        <td>
 			        <td><a href="/admin/cuestionarios/<%= cuestionarios[i].id %>"><button>Ver</button></a></td>
-		        </form>
 				</td>
-			<%}%>
-	        
-		    <%if(session.user){%>
 		    	<td><a href="/admin/cuestionarios/<%= cuestionarios[i].id %>/edit"><button>editar</button></a></td>
+
+		    	<td>
+			        <form method="post" action="/admin/cuestionarios/<%= cuestionarios[i].id %>/duplicate">
+			        	<button type="submit">Duplicar</button>
+			        </form>
+				</td>
+
 				<td>
 			        <form method="post" action="/admin/cuestionarios/<%= cuestionarios[i].id %>?_method=delete">
-			        <button type="submit" onClick="return confirm('Borrar: <% cuestionarios[i].observaciones %>');">Borrar</button>
+			       		<button type="submit" onClick="return confirm('Borrar: <% cuestionarios[i].observaciones %>');">Borrar</button>
 			        </form>
 				</td>
 			    </tr>

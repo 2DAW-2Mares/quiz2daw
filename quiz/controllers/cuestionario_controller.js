@@ -83,12 +83,39 @@ exports.create = function(req, res) {
 	);
 };
 
+
+exports.duplicate = function(req, res) {
+	var cuestionario = models.Cuestionario.build();
+	cuestionario.set('fechaFin',req.cuestionario.fechaFin);
+	cuestionario.set('observaciones',req.cuestionario.observaciones);
+	cuestionario.set('creador',req.session.profesor.id);
+	
+	req.cuestionario.getQuizzes().then(function(quizes){cuestionario.setQuizzes(quizes);
+	
+	cuestionario.validate()
+		.then(
+			function(err){
+				if(err) {
+				res.render('cuestionarios', {cuestionario: cuestionario, errors: err.errors});
+				} else {
+					for(prop in cuestionario.dataValues) {console.log(prop + ' - ' + cuestionario[prop])};
+					cuestionario.save({fields: ["fechaFin", "observaciones", "creador"]}).then(function(){
+						res.redirect('/admin/cuestionarios');
+					})	//Redireccion HTTP (URL relativo) lista de cuestionarios
+				}
+			}
+		);
+	});
+}
+
 // GET /quizes/: Cuestionario
 exports.show = function(req, res, next) {
 	req.cuestionario.getQuizzes().then(function(quizes) {
 		res.render('cuestionarios/show', {cuestionario: req.cuestionario, quizes: quizes});
+
+
+
 	}).catch(function(error) {
 		next(error);
 	});
 };
-

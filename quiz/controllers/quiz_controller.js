@@ -72,7 +72,7 @@ exports.create = function(req, res) {
 // GET /quizes/:id/edit
 exports.edit = function(req, res) {
     var quiz = req.quiz; //autoload de instancia de quiz
-    res.render('quizes/edit', {quiz: quiz});
+    res.render('quizes/edit', {quiz: quiz, cuestionario:req.cuestionario});
 };
 
 exports.update = function(req, res) {
@@ -84,18 +84,19 @@ exports.update = function(req, res) {
             .then(
             function(err){
                 if(err){
-                    res.render('quizes/edit',{quiz: req.quiz});
+                    res.render('quizes/edit',{quiz: req.quiz, cuestionario:req.cuestionario});
                 }else{
                     req.quiz
                             .save({fields:["pregunta","respuesta"]})
-                            .then(function(){res.redirect('/admin/quizes');});
+                            .then(function(){res.redirect('/admin/cuestionarios/'+ req.cuestionario.id +'/quizes');});
                 }
             }
         );
 };
 
+
 exports.destroy = function(req, res) {
     req.quiz.destroy().then( function(){
-        res.redirect('/admin/quizes');
+        res.redirect('/admin/cuestionarios/'+ req.cuestionario.id +'/quizes/');
     }).catch(function(error){next(error)});
 };
