@@ -21,7 +21,7 @@ exports.index = function(req, res) {
 			include: [{ model: models.Profesor }]
 		}).then(
                 function(cuestionarios) {
-    res.render('cuestionarios/index.ejs', {cuestionarios: cuestionarios});
+    res.render('cuestionarios/index.ejs', { cuestionarios : cuestionarios});
 });
 }
 
@@ -89,9 +89,7 @@ exports.duplicate = function(req, res) {
 	cuestionario.set('fechaFin',req.cuestionario.fechaFin);
 	cuestionario.set('observaciones',req.cuestionario.observaciones);
 	cuestionario.set('creador',req.session.profesor.id);
-	
-	req.cuestionario.getQuizzes().then(function(quizes){cuestionario.setQuizzes(quizes);
-	
+
 	cuestionario.validate()
 		.then(
 			function(err){
@@ -100,13 +98,25 @@ exports.duplicate = function(req, res) {
 				} else {
 					for(prop in cuestionario.dataValues) {console.log(prop + ' - ' + cuestionario[prop])};
 					cuestionario.save({fields: ["fechaFin", "observaciones", "creador"]}).then(function(){
+
+						var quizesN = [];
+						req.cuestionario.getQuizzes().then(function(quizes){
+
+						for( var i=0; i<quizes.length;i++){
+							quizesN[i] = models.Quiz.build();
+							quizesN[i].set('pregunta', quizes[i].pregunta);
+							quizesN[i].set('respuesta', quizes[i].pregunta);
+							quizesN[i].set('CuestionarioId', cuestionario.id);
+							quizesN[i].save({fields: ["pregunta", "respuesta", "CuestionarioId"]});
+						}
+
 						res.redirect('/admin/cuestionarios');
+					});
 					})	//Redireccion HTTP (URL relativo) lista de cuestionarios
 				}
 			}
 		);
-	});
-}
+};
 
 // GET /quizes/: Cuestionario
 exports.show = function(req, res, next) {
