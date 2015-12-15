@@ -1,0 +1,19 @@
+
+<table border=1>
+	<tr>
+		<th colspan=3><h3>Cuestionarios</h3></th>
+	</tr>
+	<tr>
+		<th><h4>CREADOR</h4></th>
+		<th><h4>OBSERVACIONES</h4></th>
+		<th><h4>FECHA</h4></th>
+	</tr>
+	<tr>
+		<td><%= cuestionario.Profesor.nombre %></td>
+		<td><%= cuestionario.observaciones %></td>
+		<td><%= cuestionario.fechaFin.toDateString() %></td>
+	</tr>
+	<tr>
+		<td colspan=3 align="center"><a href="/admin/cuestionarios/<%= cuestionario.id %>/quizes/"><button>Ver Preguntas</button></a></td>
+	</tr>
+</table>

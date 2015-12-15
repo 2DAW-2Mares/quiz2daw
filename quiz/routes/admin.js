@@ -62,6 +62,23 @@ router.put('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequir
 router.delete('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.destroy);
 router.get('/cuestionarios/new',sessionController.loginRequired, cuestionarioController.new);
 router.post('/cuestionarios/create', sessionController.loginRequired, cuestionarioController.create);
+router.post('/cuestionarios/:cuestionarioId(\\d+)/duplicate', sessionController.loginRequired, cuestionarioController.duplicate);
+
+router.get('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.show);
+
+
+//Preguntas
+router.post('/cuestionarios/:cuestionarioId(\\d+)/quizes/create', sessionController.loginRequired, quizController.create);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes/new', sessionController.loginRequired, quizController.new);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes', sessionController.loginRequired, quizController.index);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes/:quizId(\\d+)',  sessionController.loginRequired, quizController.show);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizController.edit);
+router.delete('/cuestionarios/:cuestionarioId(\\d+)/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
+router.get('/cuestionarios/:cuestionarioId(\\d+)/quizes/:quizId(\\d+)/answer', quizController.answer);
+router.put('/cuestionarios/:cuestionarioId(\\d+)/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.update);
+
+
+
 
 //Grupos
 router.get('/grupos', 							sessionController.adminRequired,	grupoController.index);
@@ -88,15 +105,6 @@ router.get('/observaciones/:observacionId(\\d+)/edit',            sessionControl
 router.put('/observaciones/:observacionId(\\d+)',                  sessionController.adminRequired, observacionController.update);
 router.delete('/observaciones/:observacionId(\\d+)', sessionController.adminRequired, observacionController.destroy);
 
-//Preguntas
-router.get('/quizes', quizController.index);
-router.get('/quizes/:quizId(\\d+)', quizController.show);
-router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-router.get('/quizes/new', sessionController.loginRequired, quizController.new);
-router.post('/quizes/create', sessionController.loginRequired, quizController.create);
-router.get('/quizes/:quizId(\\d+)/edit', sessionController.loginRequired, quizController.edit);
-router.put('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.update);
-router.delete('/quizes/:quizId(\\d+)', sessionController.loginRequired, quizController.destroy);
 
 //Profesores
 router.get('/profesores', sessionController.adminRequired, profesorController.index); /* Listado - Alex Baquerizo Jimenez */
