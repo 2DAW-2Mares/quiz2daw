@@ -36,6 +36,9 @@ CuestionarioAsignado.belongsTo(Cuestionario, Alumno);
 Alumno.hasMany(CuestionarioAsignado);
 Cuestionario.hasMany(CuestionarioAsignado);
 
+Alumno.belongsTo(Grupo);
+Grupo.hasMany(Alumno);
+
 Quiz.belongsTo(Cuestionario);
 Cuestionario.hasMany(Quiz);
 

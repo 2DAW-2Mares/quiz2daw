@@ -98,3 +98,26 @@ exports.create = function(req, res) {
 		}
 	);
 };
+
+exports.cogerTodos = function(req, res, next) {
+	models.Grupo.findAll().then(
+		function(grupos){
+			req.grupos = grupos;
+			next();
+		}
+	).catch(function(error){next(error);})
+};
+
+//Muestra los alumnos de un grupo
+exports.alumnos = function(req, res, next) {
+	models.Alumno.findAll({
+		where : {
+			GrupoId : Number(req.grupo.id)		
+		}
+	}).then(
+		function(alumnos){
+			res.render('grupos/alumnos.ejs', {alumnos: alumnos});
+		}
+	).catch(function(error){next(error);})
+};
+

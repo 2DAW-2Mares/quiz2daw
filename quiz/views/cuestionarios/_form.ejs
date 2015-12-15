@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/validarFecha.js"></script>
 <p>
 <% if(cuestionario.Profesor) { %>
 <label for="Cre" class="rem">Creador:</label>
@@ -11,8 +12,9 @@
 </p>
 <p>
 <label for="fechF" class="rem">Fecha de Finalizacion:</label>
-<input type="text" id="ape2" name="cuestionario[fechaFin]" value="<%= cuestionario.fechaFin %>" />
+<input type="date" id="fechaFin" name="cuestionario[fechaFin]" value="<%= cuestionario.fechaFin.toISOString().substring(0,10) %>" />
 </p>
 <a href="/admin/cuestionarios"><button type="button">Cancelar</button></a>
 
-<input type="submit" value="Guardar">
+<input type="button" value="Guardar" onclick="validar();">
+
