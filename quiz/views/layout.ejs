@@ -116,50 +116,7 @@
         </div>
       </div>
     </nav>
-	<!--
-	<div id="page-wrap">
-  		<header class="main" id="h1">
-			<% if(!session.user){ %>
-				<span class="right"><a href="/login">Login</a></span>
-			<%}else{%>
-				<span class="right">Rol:<%=session.role%> - <%=session.user.username%><a href="/logout">Logout</a></span>
-			<%}%>
 
-    		<h2>Quiz: el juego de las preguntas</h2>
-    	</header>
-
-    	<nav class="main" id="n1" role="navigation">
-			<span><a href="/admin/">Inicio</a></span>
-			<span><a href="/admin/quizes">Preguntas</a></span>
-			<span><a href="/admin/users">Usuarios</a></span>
-			<span><a href="/admin/alumnos">Alumnos</a></span>
-			<span><a href="/admin/profesores">Profesores</a></span>
-			<span><a href="/admin/grupos">Grupos</a></span>
-			<span><a href="/admin/cuestionarios">Cuestionarios</a></span>
-			<span><a href="/admin/materias">Materias</a></span>
-			<span><a href="/admin/observaciones">Observaciones</a></span>
-		</nav>
-    	<section class="main" id="s1">
-			<% if(typeof errors != "undefined" && errors != null  && errors.length>0){ %>
-				<span id='ErrorMsgs'>
-					Corregir errores:<br />
-					<% for (var i in errors){ %>
-						<span> <%= errors[i].message %> </span><br />
-					<% } %>
-				</span>	
-				<% } %>
-		<div><%- body %></div>
-
-    	</section>
-
-	<footer class="main" id="f1">
-		<p><a href="http://es.wikipedia.org/wiki/Quiz">¿Qué es un Quiz?</a></p>
-		<p><a href="https://github.com/2DAW-2Mares/quiz2daw">Repositorio en GitHub</a></p>
-		<p><a href="/autores">Autores</a></p>
-   	</footer>
-
-    </div>
-	-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
