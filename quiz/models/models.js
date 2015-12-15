@@ -39,8 +39,8 @@ Cuestionario.hasMany(CuestionarioAsignado);
 Alumno.belongsTo(Grupo);
 Grupo.hasMany(Alumno);
 
-Quiz.belongsTo(Cuestionario);
-Cuestionario.hasMany(Quiz);
+Quiz.belongsToMany(Cuestionario, { through: 'preguntaIncorporada' })
+Cuestionario.belongsToMany(Quiz, { through: 'preguntaIncorporada' })
 
 
 // sequelize.sync() crea e inicializa tabla de preguntas en DB

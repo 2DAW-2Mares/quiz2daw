@@ -65,7 +65,7 @@ router.post('/cuestionarios/create', sessionController.loginRequired, cuestionar
 router.post('/cuestionarios/:cuestionarioId(\\d+)/duplicate', sessionController.loginRequired, cuestionarioController.duplicate);
 
 router.get('/cuestionarios/:cuestionarioId(\\d+)', sessionController.loginRequired, cuestionarioController.show);
-
+router.put('/cuestionarios/:cuestionarioId(\\d+)/quizes/asociar', sessionController.loginRequired, quizController.batch);
 
 //Preguntas
 router.post('/cuestionarios/:cuestionarioId(\\d+)/quizes/create', sessionController.loginRequired, quizController.create);

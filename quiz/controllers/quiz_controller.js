@@ -15,11 +15,12 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-	models.Quiz.findAll({
-			where: {
-				CuestionarioId: Number(req.cuestionario.id)},
-	}).then(function(quizes) {
-    res.render('quizes/index.ejs', {quizes: quizes, cuestionario: req.cuestionario});
+	models.Quiz.findAll().then(
+                function(quizes) {
+    //res.render('quizes/index.ejs', {quizes: quizes});
+	req.cuestionario.getQuizzes().then(function(preguntasAsociadas){
+		res.render('quizes/index', {quizes: quizes, cuestionario: req.cuestionario, preguntasAsociadas: preguntasAsociadas});
+	})
 });
 }
 
@@ -99,4 +100,17 @@ exports.destroy = function(req, res) {
     req.quiz.destroy().then( function(){
         res.redirect('/admin/cuestionarios/'+ req.cuestionario.id +'/quizes/');
     }).catch(function(error){next(error)});
+};
+
+exports.batch = function(req, res){/*asociar preguntas con cuestionario***/
+	var preguntasPorAsociar = [];
+	
+	for(key in req.body.quizes) {console.log(key+' - '+req.body.quizes[key]);preguntasPorAsociar.push(key);}
+	models.Quiz.findAll({
+            where: { id: {$in: preguntasPorAsociar}}
+        }).then(function(quizes) {
+			req.cuestionario.setQuizzes(quizes);
+			req.cuestionario.save();
+			res.redirect('/admin/cuestionarios/'+req.cuestionario.id+'/quizes');
+		});
 };
