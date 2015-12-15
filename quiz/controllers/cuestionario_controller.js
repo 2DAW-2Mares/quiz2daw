@@ -59,7 +59,7 @@ exports.destroy = function(req, res){
 // GET /cuestionarios/new
 exports.new = function(req, res) {
 	var cuestionario = models.Cuestionario.build( //crea objeto cuestionario
-	{creador: "Creador", observaciones: "Observaciones", fechaFin: "Fecha de Finalizacion"}
+	{creador: "Creador", observaciones: "Observaciones", fechaFin: new Date()}
 	);
     res.render('cuestionarios/new', {cuestionario: cuestionario});
 };
